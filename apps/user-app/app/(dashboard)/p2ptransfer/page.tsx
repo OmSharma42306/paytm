@@ -1,10 +1,15 @@
 "use client"
 import { useState } from "react"
+import prisma from "@repo/db/client";
+import { P2PTransfer } from "../../lib/actions/sendP2PTransfer";
+import { type } from "os";
+
 export default function(){
     const [number,setNumber] = useState(0);
     const [amount,setAmount] = useState(0);
     console.log("Number: ",number);
     console.log("Amount:",amount)
+
     return <div>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
   <div className="bg-white p-6 rounded-lg shadow-md w-96">
@@ -34,7 +39,9 @@ export default function(){
     <button
       type="button"
       className="mt-6 w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
-    >
+    onClick={async ()=>{
+      P2PTransfer(number.toString(),amount)
+    }}>
       Send
     </button>
   </div>
